@@ -6,6 +6,13 @@ const movieSelect = document.getElementById('movie');
 
 let ticketPrice = +movieSelect.value;
 
+// Save selected movie index and price
+function setMovieData(movieIndex, moviePrice) {
+  // We don't need to use "JSON.stringify" because we're saving a string, not an array
+  localStorage.setItem('selectedMovieIndex', movieIndex);
+  localStorage.setItem('selectedMoviePrice', moviePrice);
+}
+
 // Update total and count
 function updateSelectedCount() {
   const selectedSeats = document.querySelectorAll('.row .seat.selected');
@@ -15,7 +22,7 @@ function updateSelectedCount() {
   // return new array indexes (use spread operator to convert node list into arr)
   const seatsIndex = [...selectedSeats].map((seat) => [...seats].indexOf(seat));
 
-  console.log(seatsIndex);
+  localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex))
 
   const selectedSeatsCount = selectedSeats.length;
 
@@ -27,6 +34,7 @@ function updateSelectedCount() {
 // Movie Select event
 movieSelect.addEventListener('change', e => {
   ticketPrice = +e.target.value;
+  setMovieData(e.target.selectedIndex, e.target.value);
   updateSelectedCount();
 });
 
