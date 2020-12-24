@@ -10,6 +10,13 @@ let ticketPrice = +movieSelect.value;
 function updateSelectedCount() {
   const selectedSeats = document.querySelectorAll('.row .seat.selected');
 
+  // Copy selected seats into arr
+  // Map through array
+  // return new array indexes (use spread operator to convert node list into arr)
+  const seatsIndex = [...selectedSeats].map((seat) => [...seats].indexOf(seat));
+
+  console.log(seatsIndex);
+
   const selectedSeatsCount = selectedSeats.length;
 
   // console.log(selectedSeatsCount);
